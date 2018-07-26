@@ -1,4 +1,5 @@
-# hdl_localization
+hdl_localization
+
 ***hdl_localization*** is a ROS package for real-time 3D localization using a 3D LIDAR, such as velodyne HDL32e and VLP16. This package performs Unscented Kalman Filter-based pose estimation. It first estimates the sensor pose from IMU data implemented on the LIDAR, and then performs multi-threaded NDT scan matching between a globalmap point cloud and input point clouds to correct the estimated pose. IMU-based pose prediction is optional. If you disable it, the system predicts the sensor pose with the constant velocity model without IMU information.
 
 Video:<br>
@@ -14,6 +15,21 @@ The following ros packages are required:
 - pcl_ros
 - <a href="https://github.com/koide3/ndt_omp">ndt_omp</a>
 
+## Package installation
+
+* pcl_ros
+
+```
+$ sudo apt-get install ros-kinetic-pcl_ros
+```
+
+* ndt_omp (ros package)
+
+```
+$ cd catkin_ws/src
+$ git clone https://github.com/koide3/ndt_omp
+```
+
 ## Parameters
 All parameters are listed in *launch/hdl_localization.launch* as ros params.<br>
 You can specify the initial sensor pose using "2D Pose Estimate" on rviz, or using ros params (see example launch file).
@@ -24,17 +40,12 @@ Example bag files (recorded in an outdoor environment): RE
 - [hdl_400.bag.tar.gz](http://www.aisl.cs.tut.ac.jp/databases/hdl_graph_slam/hdl_400.bag.tar.gz) (933MB)
 
 ```bash
-rosparam set use_sim_time true
-roslaunch hdl_localization hdl_localization.launch
+$ rosparam set use_sim_time true
+$ roslaunch hdl_localization hdl_localization.launch
 ```
 
 ```bash
-roscd hdl_localizatrion/rviz
-rviz -d hdl_localizatrion.rviz
-```
-
-```bash
-rosbag play --clock hdl_400.bag
+$ rosbag play --clock hdl_400.bag
 ```
 
 <img src="data/figs/localization1.png" height="256pix" /> <img src="data/figs/localization2.png" height="256pix" /> 
