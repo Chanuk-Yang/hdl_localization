@@ -34,21 +34,16 @@ $ git clone https://github.com/koide3/ndt_omp
 All parameters are listed in *launch/hdl_localization.launch* as ros params.<br>
 You can specify the initial sensor pose using "2D Pose Estimate" on rviz, or using ros params (see example launch file).
 
-## Example
-
-Example bag files (recorded in an outdoor environment): RE
-- [hdl_400.bag.tar.gz](http://www.aisl.cs.tut.ac.jp/databases/hdl_graph_slam/hdl_400.bag.tar.gz) (933MB)
+## Execution
 
 ```bash
 $ rosparam set use_sim_time true
-$ roslaunch hdl_localization hdl_localization.launch
+$ roslaunch hdl_localization hdl_localization_hy.launch
 ```
 
 ```bash
-$ rosbag play --clock hdl_400.bag
+$ rosbag play --clock hy_data1.bag
 ```
-
-<img src="data/figs/localization1.png" height="256pix" /> <img src="data/figs/localization2.png" height="256pix" /> 
 
 If it doesn't work well, change *ndt_neighbor_search_method* in *hdl_localization.launch* to "DIRECT1". It makes the scan matching significantly fast, but a little bit unstable.
 
